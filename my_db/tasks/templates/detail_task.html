@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>О СДЕЛКЕ</h2>
+<h4>Направление: {{ single_obj.route }}</h4>
+<h4>Характер груза: {{ single_obj.cargo }}</h4>
+<h4>Тип ТС: {{ single_obj.transport_requirement }}</h4>
+<h4>Стадия перевозки: {{ single_obj.status }}</h4>
+<h4>Прибыль: {{ profit }}</h4>
+
+<h4>Дата создания: {{ single_obj.date }}</h4>
+
+{% if user.userinformation.post == 'Менеджер' or user.is_staff %}
+
+    <a href="/all_tasks/delete/{{ single_obj.id }}">Удалить перевозку</a>
+
+
+    <a href="/all_tasks/edit/{{ single_obj.id }}">Изменить информацию о сделке</a>
+
+{% endif %}
+
+<h2>ОТВЕТСВЕННЫЕ ЛИЦА</h2>
+{% if single_obj.manager %}
+    <h4>Менеджер: single_obj.manager</h4>
+{% else %}
+    <h4>Менеджер: {{ single_obj.author.userinformation.name }} {{ single_obj.author.userinformation.surname }}</h4>
+{% endif %}
+<h4>Логист: {{ single_obj.logist }}</h4>
+
+<h2>КЛИЕНТ</h2>
+<h4> Cтоимость клиента: {{ single_obj.price_client }}</h4>
+
+<h2>ПЕРЕВОЗЧИК</h2>
+<h4>Компания перезчик: {{ single_carrier.carrier }}</h4>
+<h4>Марка ТС и ГОС Номер: {{ single_carrier.brand_and_number_car }}</h4>
+<h4>ФИО Водителя: {{ single_carrier.name_driver }}</h4>
+<h4>Стоимость перевозки: {{ single_carrier.price_carrier }}</h4>
+
+{% if user.userinformation.post == 'Логист' or user.is_staff %}
+
+    <a href="editcarrier/">Изменить информацию о перевозчике</a>
+{% endif %}
+
+{% endblock %}

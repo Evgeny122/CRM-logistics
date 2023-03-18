@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}
+List of employees
+{% endblock %}
+
+{% block content %}
+
+{% for user in sort_obj %}
+    {% if user.name and user.surname %}
+        <h1>
+            <a href="/profile/{{ user.pk }}">{{ user.name }} {{ user.surname }}</a>
+            <h3>{{ user.post }}</h3>
+        </h1>
+        {% if user.status %}
+            <h5>Работает</h5>
+        {% else %}
+            <h5>Не работает</h5>
+        {% endif %}
+    {% else %}
+        <h1>
+            <a href="/profile/{{ user.pk }}">{{ user.profile }}</a>
+            <h3>{{ user.post }}</h3>
+        </h1>
+        {% if user.status %}
+            <h5>Работает</h5>
+        {% else %}
+            <h5>Не работает</h5>
+        {% endif %}
+
+    {% endif %}
+{% endfor %}
+
+{% endblock %}

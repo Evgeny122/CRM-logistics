@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}
+{{ block.super }} - {{ profile }}
+{% endblock %}
+
+{% block content %}
+
+<img src="{{ profile.userinformation.profile_image.url }}" alt="{{ profile.userinformation.bio }}" width="250">
+
+{% if profile.userinformation.name or profile.userinformation.surname %}
+    <h2>{{ profile.userinformation.name }} {{ profile.userinformation.surname }}</h2>
+{% else %}
+    <h2> Вам нужно указать имя и фамилию </h2>
+{% endif %}
+
+
+<h2>Моя должность: {{ profile.userinformation.post }}</h2>
+
+
+{% if profile.userinformation.bio %}
+    <h1>О себе: {{ profile.userinformation.bio }}</h1>
+{% else %}
+    <h1>О себе: </h1>
+{% endif %}
+
+{% if user.id == profile.id or request.user.is_staff%}
+    <a href="/profile/edit/{{ profile.id }}">Редактировать</a>
+{% endif %}
+{% endblock %}

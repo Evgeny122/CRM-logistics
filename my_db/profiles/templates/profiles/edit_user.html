@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}
+{{ block.super }} - Eediting a {{ profile }}
+{% endblock %}
+
+
+{% block content %}
+
+<h1>
+    <mark>Eediting a user: {{ profile }} </mark>
+</h1>
+
+<h2>{{ profile.userinformation.name }} {{ profile.userinformation.surname }}</h2>
+
+{% if profile.userinformation.profile_image %}
+    <img src="{{ profile.userinformation.profile_image.url }}" alt="{{ profile.userinformation.bio }}" width="300">
+{% endif %}
+
+
+
+{% if profile.userinformation.bio %}
+    <h1>bio: {{ profile.userinformation.bio }}</h1>
+{% else %}
+    <h1>No bio</h1>
+{% endif %}
+
+
+{% if profile.userinformation.post %}
+    <h1>Your post: {{ profile.userinformation.post }}</h1>
+{% else %}
+    <h1> No post </h1>
+{% endif %}
+
+<form action="" method="post" enctype="multipart/form-data">
+    
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    {% if not profile.userinformation.bio %}
+        <input type="submit" value="Добавить">
+    {% else %}
+        <input type="submit" value="Изменить">
+    {% endif %}
+</form>
+  
+
+{% endblock %}

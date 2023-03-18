@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% if user.is_authenticated %}
+{% for task in all_list %}
+        <h2>№: {{ task.id }}</h2>
+        <h4>{{ task.date }}</h4>
+        <h2>Направление: <a href="/all_tasks/{{ task.id }}">{{ task.route }}</a></h2>
+        <h3>Характер груза: {{ task.cargo }}</h3>
+        <h3>Тип транспорта: {{ task.transport_requirement }}</h3>
+        <h3>Менеджер: <a href="/profile/{{ task.author.id }}">{{ task.author.userinformation.name }} {{ task.author.userinformation.surname }}</a></h3>
+
+        <h4>
+            <a href="/commentary/{{ task.id }}">Комментарии({{ task.count_comments }})</a>
+        </h4>
+        
+    
+        <form action="/task/like/{{ task.id }}/" method="post">
+            {% csrf_token %}
+            <input type="submit" value="👍🏻{{ task.get_likes }}">
+        </form>
+       
+        <form action="/task/dlike/{{ task.id }}/" method="post">
+            {% csrf_token %}
+            <input type="submit" value="👎🏻{{ task.get_dont_likes }}">
+        </form>
+
+
+{% endfor %}
+
+{% else %}
+    <h1>
+    <mark><span>У вас ограниченный доступ</span></mark>
+    </h1>
+{% endif %}
+
+
+
+
+{% endblock %}

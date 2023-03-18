@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Name: {{ single_obj.company_name }}</h1>
+<h1>Telephone: {{ single_obj.telephone }}</h1>
+<h1>Ati: {{ single_obj.ati }}</h1>
+<h1>Direction: {{ single_obj.direction }}</h1>
+
+
+<a href=" /allcar/car/delete/{{ single_obj.id }}">Удалить перевозчика</a>
+
+
+<a href=" /allcar/car/edit/{{ single_obj.id }}">Изменить перевозчика</a>
+
+
+{% endblock %}
+

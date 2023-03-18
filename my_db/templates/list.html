@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+    {% for carrier in all_list %}
+        <h3>
+        <a href="car/{{ carrier.id }}">{{ carrier.company_name }}</a>
+        </h3>
+    {% endfor %}
+
+<h2>
+<a href="/car/create/">Создать нового перевозчика +</a>
+</h2>
+
+{% endblock %}

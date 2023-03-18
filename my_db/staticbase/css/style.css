@@ -1,0 +1,15 @@
+body {
+    margin: 0;
+}
+
+nav a{
+    color: rgb(238, 242, 240);
+    text-decoration: none;
+}
+
+nav{
+    padding: 1.45em;
+    background-color: hsl(141, 33%, 35%);
+    display: flex;
+    justify-content: space-between;
+}

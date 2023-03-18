@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Commentaries</h2>
+{% if single_object.commentary.all %}
+{% for c in single_object.commentary.all %}
+    <p>
+
+    {% if c.user.userinformation.profile_image %}
+        <img src="{{ c.user.userinformation.profile_image.url }}" alt="{{ c.user }}" width="50">
+    {% endif %}
+    
+    {{ c.user }}/
+    {{ c.text  }}/
+    {{ c.date.time }} /
+     
+
+    {% if c.user == user or request.user.is_staff %}
+        <a href="edit/{{ c.pk }}/">Изменить</a> |
+        <a href="/commentary/delete/{{ c.pk }}">Удалить</a>
+    {% endif %}
+     
+    </p>
+{% endfor %}
+
+{% else %}
+    <h1>
+    <mark><span>пока нет комментариев</span></mark>
+    </h1>
+{% endif %}
+
+<form action="" method="post">
+        
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <input type="submit" value="Отправить">
+</form>
+
+
+{% endblock %}

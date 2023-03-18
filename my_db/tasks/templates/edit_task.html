@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}
+Редактирование перевозки: {{ single_obj.route }}
+{% endblock %}
+
+{% block content %}
+<h1>
+    <mark>Редактирование перевозки: {{ single_obj.route }}</mark>
+</h1>
+
+<h3>Направление: {{ single_obj.route }}</h3>
+<h3>Стадия перевозки: {{ single_obj.status }}</h3>
+
+<h3>Характер груза: {{ single_obj.cargo }}</h3>
+<h3>Требуемое ТС: {{ single_obj.transport_requirement }}</h3>
+<h3>Дата создания: {{ single_obj.date }}</h3>
+<h3>Cтоимость клиента: {{ single_obj.price_client }}</h3>
+
+<h3>Менеджер: {{ single_obj.author.userinformation.name }} {{ single_obj.author.userinformation.surname }}</h3>
+<h3>Логист: {{ single_obj.logist }}</h3>
+
+
+<form action="" method="post">   
+    {% csrf_token %}   
+    {{ form.as_p }}
+    <input type="submit" value="Изменить">
+</form>
+{% endblock %}

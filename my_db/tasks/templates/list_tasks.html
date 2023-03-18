@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}
+List of tasks
+{% endblock %}
+
+{% block content %}
+
+{% for task in all_list %}
+    <h3>
+        {{ task.id }}
+        <a href="/all_tasks/{{ task.id }}">{{ task.route }}</a>
+        {{ task.status }}
+        {{ task.cargo }}
+        {{ task.transport_requirement }}
+        {{ task.date }}
+        {{ task.author }}
+    </h3>
+{% endfor %}
+
+{% if user.userinformation.post == 'Менеджер' or user.is_staff %}
+    <h1>
+        <a href="/all_tasks/create/">Создать перевозку</a>
+    </h1>
+{% endif %}
+
+{% endblock %}

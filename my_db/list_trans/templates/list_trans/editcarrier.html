@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Редактирование перевозчика</h2>
+<h4>Компания перезчик: {{ single_carrier.carrier }}</h4>
+<h4>Марка ТС и ГОС Номер: {{ single_carrier.brand_and_number_car }}</h4>
+<h4>ФИО Водителя: {{ single_carrier.name_driver }}</h4>
+<h4>Стоимость перевозки: {{ single_carrier.price_carrier }}</h4>
+
+
+
+<form actions="" method="post">
+    {% csrf_token %}      
+    {{ form.as_p }}
+    <input type="submit" value="Изменить">  
+</form>
+
+<a href="/all_tasks/{{ task.id }}/">Вернуться в перевозку</a>
+{% endblock %}
